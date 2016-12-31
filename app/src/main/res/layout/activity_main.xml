@@ -10,8 +10,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.fyp.kwl.myapplication.MainActivity">
 
-    <TextView
+    <Button
+        android:text="@android:string/search_go"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:id="@+id/button2"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        tools:style="@style/Widget.AppCompat.Button" />
+
 </RelativeLayout>
