@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -11,12 +12,32 @@
     tools:context="com.fyp.kwl.myapplication.MainActivity">
 
     <Button
-        android:text="@android:string/search_go"
+        android:text="@string/favorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button2"
+        android:id="@+id/btnFav"
+        tools:style="@style/Widget.AppCompat.Button"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        tools:style="@style/Widget.AppCompat.Button" />
+        android:layout_marginTop="203dp" />
+
+    <Button
+        android:text="@string/search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSear"
+        tools:style="@style/Widget.AppCompat.Button"
+        android:layout_marginTop="62dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/btnFav" />
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@android:color/holo_red_light"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/imgBtnSetting" />
+
 
 </RelativeLayout>
