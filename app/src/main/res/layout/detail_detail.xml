@@ -3,26 +3,73 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/detail_detail"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.fyp.kwl.myapplication.detail.Detail">
-    <TableRow>
+    <TableRow
+        android:minHeight="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
         <TextView
-            android:layout_column="1"
-            android:text="TextView"
+            android:layout_column="0"
+            android:layout_weight="1"
+            android:text="萬宜大廈"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvTitle" />
+            android:id="@+id/tvTitle"
+            android:textSize="24sp" />
 
         <ImageView
+            android:maxHeight="150dp"
             android:layout_column="2"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@color/black_overlay"
-            android:id="@+id/ivImage" />
+            android:src="@drawable/ic_action_name"
+            android:gravity="fill"
+            android:id="@+id/ivImage"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false" />
+
+
+    </TableRow>
+    <TableRow
+        android:layout_width="fill_parent"
+        >
+
+        <TextView
+            android:paddingTop="20dp"
+            android:layout_span="2"
+            android:layout_weight="3"
+            android:text="萬宜大廈是香港中環核心商業區的一座甲級商廈及商場，由萬興行投資有限公司發展。大廈位於香港島中環德輔道中61-69號，比鄰中環街市及恒生銀行總行大廈。
+
+由於地勢的落差，萬宜大廈在兩層分別設有出口連接皇后大道中及德輔道中。而萬宜大廈所在的位置正是1890年香港進行的海旁填海計劃前中環原有的海岸綫。"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/tvContent"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="18sp"
+            android:textAlignment="textStart" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <Button
+            android:layout_span="2"
+            android:layout_weight="3"
+            android:layout_column="0"
+            android:text="Nevigating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button"
+            android:textSize="18sp"
+            android:textStyle="normal|bold" />
     </TableRow>
 </TableLayout>

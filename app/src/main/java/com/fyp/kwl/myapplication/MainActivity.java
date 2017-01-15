@@ -33,14 +33,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onInit( int status ) {
                 if ( status == TextToSpeech.SUCCESS ){
-                    result = ttsobject.setLanguage(Locale.US);
+                    result = ttsobject.setLanguage(new Locale("yue"));
                     //new Locale("yue")
+                    //Locale.US
                 }else {
                     Toast.makeText(MainActivity.this, "Do not support", Toast.LENGTH_LONG).show();
                 }
 
             }
         });
+
+
 
         lv = (ListView)findViewById(R.id.lvMainMenu);
         listMainMenu();
@@ -86,18 +89,18 @@ public class MainActivity extends AppCompatActivity {
                             switch (MainActivity.position){
                                 case 0:
 //                                    Toast.makeText(MainActivity.this, "single favourite cliked", Toast.LENGTH_SHORT).show();
-                                    speak("favorite");
-//                                    speak("我的最愛");
+//                                    speak("favorite");
+                                    speak("我的最愛");
                                     break;
                                 case 1:
 //                                    Toast.makeText(MainActivity.this, "single search clicked", Toast.LENGTH_SHORT).show();
-                                    speak("search");
-//                                    speak("搜尋");
+//                                    speak("search");
+                                    speak("搜尋");
                                     break;
                                 case 2:
 //                                    Toast.makeText(MainActivity.this, "single setting clicked", Toast.LENGTH_SHORT).show();
-                                    speak("setting");
-//                                    speak("設定");
+//                                    speak("setting");
+                                    speak("設定");
                                     break;
                             }
                             //  open activity
@@ -106,18 +109,21 @@ public class MainActivity extends AppCompatActivity {
                             switch (MainActivity.position){
                                 case 0:
 //                                    Toast.makeText(MainActivity.this, "favorite cliked", Toast.LENGTH_SHORT).show();
-                                    speak("move to my favorite page");
+//                                    speak("move to my favorite page");
+                                    speak("移至我的最愛");
                                     intent = new Intent(MainActivity.this, SearchMenu.class);
                                     break;
                                 case 1:
 //                                    Toast.makeText(MainActivity.this, "search clicked", Toast.LENGTH_SHORT).show();
-                                    speak("move to searching page");
+//                                    speak("move to searching page");
+                                    speak("移至搜尋");
                                     intent = new Intent(MainActivity.this, SearchMenu.class);
                                     break;
                                 case 2:
 //                                    Toast.makeText(MainActivity.this, "setting clicked", Toast.LENGTH_SHORT).show();
                                     intent = new Intent(MainActivity.this, SearchMenu.class);
-                                    speak("move to setting page");
+//                                    speak("move to setting page");
+                                    speak("移至設定");
                                     break;
                             }
                             startActivity(intent);
@@ -128,11 +134,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     public void speak(String speakedText){
         if ( result == TextToSpeech.LANG_NOT_SUPPORTED || result == TextToSpeech.LANG_MISSING_DATA ){
             Toast.makeText(this, "Feature not support on your device", Toast.LENGTH_SHORT).show();
         }else {
             ttsobject.speak(speakedText, TextToSpeech.QUEUE_FLUSH, null);
         }
+    }
+
+    @Override
+    public void finish() {
+        if (ttsobject.isSpeaking())ttsobject.stop();
+        ttsobject.shutdown();
+        super.finish();
     }
 }

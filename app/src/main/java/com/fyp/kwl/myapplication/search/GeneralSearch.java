@@ -1,20 +1,28 @@
 package com.fyp.kwl.myapplication.search;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Handler;
+import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fyp.kwl.myapplication.MainActivity;
 import com.fyp.kwl.myapplication.R;
+import com.fyp.kwl.myapplication.detail.Detail;
+
+import java.util.ArrayList;
+import java.util.Locale;
 
 public class GeneralSearch extends AppCompatActivity {
     int timeOfClick = 0;
@@ -24,6 +32,7 @@ public class GeneralSearch extends AppCompatActivity {
     TextToSpeech ttsobject;
     public int result;
     private ArrayAdapter<String> adapter;
+    private final int REQ_CODE_SPEECH_INPUT = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,26 +46,26 @@ public class GeneralSearch extends AppCompatActivity {
 
         listBuilding();
         editBoxActions();
+        lvActions();
 
+        lv.setTextFilterEnabled(true);
+        et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-//        lv.setTextFilterEnabled(true);
-//        et.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-////                GeneralSearch.this.adapter.getFilter().filter(s);
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-////                GeneralSearch.this.adapter.getFilter().filter(s);
-//
-//            }
-//        });
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                adapter.getFilter().filter(s.toString());
+
+            }
+        });
     }
 
     private void listBuilding() {
@@ -77,6 +86,41 @@ public class GeneralSearch extends AppCompatActivity {
 
         lv.setAdapter(adapter);
     }
+
+    private void lvActions(){
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                final View v = view;
+                timeOfClick++;
+                GeneralSearch.position = position;
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        String building = ((TextView) v).getText().toString();
+                        //  output sound
+                        if (timeOfClick == 1){
+                            speak(building);
+                            //  open activity
+                        }else if (timeOfClick == 2){
+                            //  detail
+                            if (position == 0){
+                                Intent intent = new Intent(GeneralSearch.this, Detail.class);
+//                            intent.putExtra("building", building);
+                                startActivity(intent);
+
+                            }
+                        }
+                        timeOfClick = 0;
+                    }
+                } , 500);
+
+            }
+        });
+    }
+
     private void editBoxActions(){
         et.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,27 +137,13 @@ public class GeneralSearch extends AppCompatActivity {
                             speak("搜尋列，雙擊使用語音輸入");
                             //  open activity
                         }else if (timeOfClick == 2){
-                            Intent intent = null;
-                            switch (GeneralSearch.position){
-                                case 0:
-//                                    Toast.makeText(MainActivity.this, "favorite cliked", Toast.LENGTH_SHORT).show();
-//                                    speak("move to general searching page");
-                                    speak("移至普通搜尋");
-                                    intent = new Intent(GeneralSearch.this, GeneralSearch.class);
-                                    break;
-                                case 1:
-//                                    Toast.makeText(MainActivity.this, "search clicked", Toast.LENGTH_SHORT).show();
-//                                    speak("move to selecting ");
-                                    speak("移至地區搜尋");
-                                    intent = new Intent(GeneralSearch.this, SearchMenu.class);
-                                    break;
-                            }
-                            startActivity(intent);
+//                            speak("啟動語音輸入");
+                            promptSpeechInput();
+
                         }
                         timeOfClick = 0;
                     }
                 } , 500);
-
             }
         });
     }
@@ -122,6 +152,39 @@ public class GeneralSearch extends AppCompatActivity {
             Toast.makeText(this, "Feature not support on your device", Toast.LENGTH_SHORT).show();
         }else {
             ttsobject.speak(speakedText, TextToSpeech.QUEUE_FLUSH, null);
+        }
+    }
+
+    private void promptSpeechInput() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+
+        try {
+            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
+        } catch (ActivityNotFoundException a) {
+            Toast.makeText(getApplicationContext(),
+                    "Not support",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case REQ_CODE_SPEECH_INPUT: {
+                if (resultCode == RESULT_OK && null != data) {
+
+                    ArrayList<String> result = data
+                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    et.setText(result.get(0));
+                }
+                break;
+            }
+
         }
     }
 }

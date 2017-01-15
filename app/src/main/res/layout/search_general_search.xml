@@ -15,7 +15,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="Search"
-        android:text=""
         android:ems="10"
         android:id="@+id/etSearchBuild"
         android:layout_alignParentEnd="true"

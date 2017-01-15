@@ -50,11 +50,13 @@ public class SearchMenu extends AppCompatActivity {
                             switch (SearchMenu.position){
                                 case 0:
 //                                    Toast.makeText(MainActivity.this, "single favourite cliked", Toast.LENGTH_SHORT).show();
-                                    speak("Searching by input");
+//                                    speak("Searching by input");
+                                    speak("跟據輸入搜尋");
                                     break;
                                 case 1:
 //                                    Toast.makeText(MainActivity.this, "single search clicked", Toast.LENGTH_SHORT).show();
-                                    speak("searching by distinct");
+//                                    speak("searching by distinct");
+                                    speak("跟據選擇地區和類型搜尋");
                                     break;
                             }
                             //  open activity
@@ -63,13 +65,14 @@ public class SearchMenu extends AppCompatActivity {
                             switch (SearchMenu.position){
                                 case 0:
 //                                    Toast.makeText(MainActivity.this, "favorite cliked", Toast.LENGTH_SHORT).show();
-                                    speak("move to general searching page");
-                                    speak("普通搜尋");
+//                                    speak("move to general searching page");
+                                    speak("移至普通搜尋");
                                     intent = new Intent(SearchMenu.this, GeneralSearch.class);
                                     break;
                                 case 1:
 //                                    Toast.makeText(MainActivity.this, "search clicked", Toast.LENGTH_SHORT).show();
-                                    speak("move to selecting ");
+//                                    speak("move to selecting ");
+                                    speak("移至地區搜尋");
                                     intent = new Intent(SearchMenu.this, SearchMenu.class);
                                     break;
                             }
