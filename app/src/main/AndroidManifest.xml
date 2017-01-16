@@ -19,7 +19,8 @@
         <activity
             android:name=".search.GeneralSearch"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".detail.Detail"></activity>
+        <activity android:name=".detail.Detail" />
+        <activity android:name=".Nevigate"></activity>
     </application>
 
 </manifest>
