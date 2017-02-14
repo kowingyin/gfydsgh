@@ -16,8 +16,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".search.SearchMenu" />
+        <activity android:name=".search.BuildingType"/>
+        <activity android:name=".search.DistrictSearch"/>
         <activity
             android:name=".search.GeneralSearch"
+
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".detail.Detail" />
         <activity android:name=".Nevigate" />

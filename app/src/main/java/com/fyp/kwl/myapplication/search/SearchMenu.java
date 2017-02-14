@@ -60,6 +60,7 @@ public class SearchMenu extends AppCompatActivity {
                                     break;
                             }
                             //  open activity
+
                         }else if (timeOfClick == 2){
                             Intent intent = null;
                             switch (SearchMenu.position){
@@ -73,7 +74,7 @@ public class SearchMenu extends AppCompatActivity {
 //                                    Toast.makeText(MainActivity.this, "search clicked", Toast.LENGTH_SHORT).show();
 //                                    speak("move to selecting ");
                                     speak("移至地區搜尋");
-                                    intent = new Intent(SearchMenu.this, SearchMenu.class);
+                                    intent = new Intent(SearchMenu.this, DistrictSearch.class);
                                     break;
                             }
                             startActivity(intent);
