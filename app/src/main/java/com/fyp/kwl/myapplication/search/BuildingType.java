@@ -50,8 +50,7 @@ public class BuildingType extends AppCompatActivity {
 
     private void listBuilding() {
         //  Create list of items
-        String[] showItems = {"商場" ,"學校" , "圖書館" , "公園" ,
-        };
+        String[] showItems = {"商場" ,"學校" , "圖書館" , "公園" };
 
         //  Build Adapter
         adapter = new ArrayAdapter<String>(this, R.layout.menu_list_show_item, showItems);

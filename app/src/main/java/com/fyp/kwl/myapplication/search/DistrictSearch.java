@@ -50,8 +50,7 @@ public class DistrictSearch extends AppCompatActivity {
 
     private void listDistrict() {
         //  Create list of items
-        String[] showItems = {"東區" ,"灣仔區" , "中西區" , "南區" , "油尖旺區" , "深水埗區" , "九龍城區" , "黃大仙區" , "觀塘區" , "元朗區" , "屯門區" , "大埔區" , "北區" , "沙田區" , "葵青區" , "荃灣區" , "離島區" , "西貢區",
-        };
+        String[] showItems = {"東區" ,"灣仔區" , "中西區" , "南區" , "油尖旺區" , "深水埗區" , "九龍城區" , "黃大仙區" , "觀塘區" , "元朗區" , "屯門區" , "大埔區" , "北區" , "沙田區" , "葵青區" , "荃灣區" , "離島區" , "西貢區" };
 
         //  Build Adapter
         adapter = new ArrayAdapter<String>(this, R.layout.menu_list_show_item, showItems);
@@ -81,7 +80,7 @@ public class DistrictSearch extends AppCompatActivity {
                         }else if (timeOfClick == 2){
                             //  detail
                             if (position == 0){
-                                speak("移至類型搜尋");
+                                speak("移至"+building);
                                 Intent intent = new Intent(DistrictSearch.this, BuildingType.class);
 //                            intent.putExtra("building", building);
                                 startActivity(intent);
