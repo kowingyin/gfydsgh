@@ -80,7 +80,7 @@ public class BuildingType extends AppCompatActivity {
                         }else if (timeOfClick == 2){
                             //  detail
                             if (position == 0){
-                                Intent intent = new Intent(BuildingType.this, Detail.class);
+                                Intent intent = new Intent(BuildingType.this, DistrictIsKnowOrNot.class);
 //                            intent.putExtra("building", building);
                                 startActivity(intent);
 

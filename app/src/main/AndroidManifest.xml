@@ -16,15 +16,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".search.SearchMenu" />
-        <activity android:name=".search.BuildingType"/>
-        <activity android:name=".search.DistrictSearch"/>
+        <activity android:name=".search.BuildingType" />
+        <activity android:name=".search.DistrictSearch" />
         <activity
             android:name=".search.GeneralSearch"
-
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".detail.Detail" />
         <activity android:name=".Nevigate" />
-        <activity android:name=".Favorite"></activity>
+        <activity android:name=".Favorite" />
+        <activity android:name=".search.DistrictIsKnowOrNot" />
+        <activity android:name=".search.FilteredBuilding"></activity>
     </application>
 
 </manifest>

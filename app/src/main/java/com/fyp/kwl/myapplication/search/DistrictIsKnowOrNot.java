@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.fyp.kwl.myapplication.MainActivity;
 import com.fyp.kwl.myapplication.R;
 
-public class SearchMenu extends AppCompatActivity {
+public class DistrictIsKnowOrNot extends AppCompatActivity {
     int timeOfClick = 0;
     static int position;   //  position of clicking on listview
     ListView lv;
@@ -24,7 +24,7 @@ public class SearchMenu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.search_menu);
+        setContentView(R.layout.activity_district_is_know_or_not);
 
         lv = (ListView)findViewById(R.id.lvSearchMenu);
 
@@ -35,60 +35,62 @@ public class SearchMenu extends AppCompatActivity {
     }
 
     private void clickOption() {
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                timeOfClick++;
-                SearchMenu.position = position;
+        
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    timeOfClick++;
+                    SearchMenu.position = position;
 
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        //  output sound
-                        if (timeOfClick == 1){
-                            switch (SearchMenu.position){
-                                case 0:
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            //  output sound
+                            if (timeOfClick == 1){
+                                switch (SearchMenu.position){
+                                    case 0:
 //                                    Toast.makeText(MainActivity.this, "single favourite cliked", Toast.LENGTH_SHORT).show();
 //                                    speak("Searching by input");
-                                    speak("跟據輸入搜尋");
-                                    break;
-                                case 1:
+                                        speak("知道");
+                                        break;
+                                    case 1:
 //                                    Toast.makeText(MainActivity.this, "single search clicked", Toast.LENGTH_SHORT).show();
 //                                    speak("searching by distinct");
-                                    speak("跟據選擇地區和類型搜尋");
-                                    break;
-                            }
-                            //  open activity
+                                        speak("不知道");
+                                        break;
+                                }
+                                //  open activity
 
-                        }else if (timeOfClick == 2){
-                            Intent intent = null;
-                            switch (SearchMenu.position){
-                                case 0:
+                            }else if (timeOfClick == 2){
+                                Intent intent = null;
+                                switch (SearchMenu.position){
+                                    case 0:
 //                                    Toast.makeText(MainActivity.this, "favorite cliked", Toast.LENGTH_SHORT).show();
 //                                    speak("move to general searching page");
-                                    speak("移至普通搜尋");
-                                    intent = new Intent(SearchMenu.this, GeneralSearch.class);
-                                    break;
-                                case 1:
+                                        speak("移至選擇地區");
+                                        intent = new Intent(DistrictIsKnowOrNot.this, DistrictSearch.class);
+                                        break;
+                                    case 1:
 //                                    Toast.makeText(MainActivity.this, "search clicked", Toast.LENGTH_SHORT).show();
 //                                    speak("move to selecting ");
-                                    speak("移至地區搜尋");
-                                    intent = new Intent(SearchMenu.this, BuildingType.class);
-                                    break;
+                                        speak("移至選擇建築物");
+                                        intent = new Intent(DistrictIsKnowOrNot.this, GeneralSearch.class);
+                                        break;
+                                }
+                                startActivity(intent);
                             }
-                            startActivity(intent);
+                            timeOfClick = 0;
                         }
-                        timeOfClick = 0;
-                    }
-                } , 500);
-            }
-        });
-    }
+                    } , 500);
+                }
+            });
+
+        }
 
     private void listSearchMenu() {
         //  Create list of items
-        String[] showItems = {"By Input", "By Distinct"};
+        String[] showItems = {"Know", "Don't know"};
 
         //  Build Adapter
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.menu_list_show_item, showItems);
@@ -96,6 +98,7 @@ public class SearchMenu extends AppCompatActivity {
         //  Configure the list view to the Adapter
 
         lv.setAdapter(adapter);
+
     }
 
     public void speak(String speakedText){
